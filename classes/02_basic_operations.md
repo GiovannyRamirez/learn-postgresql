@@ -76,3 +76,25 @@ Also, you can add filters, limits, aggregations.
 ```sql
 SELECT * FROM users LIMIT 2 OFFSET 2;
 ```
+
+# WHERE clause
+
+Its important to get correct desired information from a table, you can use it to get conditions from columns like startsWith, endsWith, equalsTo, and, also you can build the condition with _AND, OR_.
+
+## Example
+
+```sql
+SELECT * FROM users WHERE name = 'Name Changed'; --(equalsTo)
+SELECT * FROM users WHERE name LIKE 'Na%'; --(startsWith)
+SELECT * FROM users WHERE name LIKE '%ed'; --(endsWith)
+```
+
+_percentage %_ is related to unknown characters, also, you can use \_underscore \_\_ to determine quantity of characters, and, even, you can combine it.
+
+## Example
+
+```sql
+SELECT * FROM users WHERE name LIKE '__st'; --(2 characters before st)
+SELECT * FROM users WHERE name LIKE '_a%'; --(1 character before a, and ends with any other characters)
+SELECT * FROM users WHERE name LIKE '%a%'; --(contains a);
+```
