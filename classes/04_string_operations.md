@@ -18,3 +18,33 @@ SELECT id, name,
     '*'||id||' '||name as concat_pipe
 FROM users;
 ```
+
+# SUBSTRING(), POSITION()
+
+- _SUBSTRING()_: Allows to get a substring from string passed as argument, indicating start and end positions
+- _POSITION()_: Allows to get the position of a determined substring from string passed as argument
+
+## Example
+
+```sql
+SELECT name,
+    SUBSTRING(name, 0, 5), --(From name column, char 0 to 5)
+    POSITION(' ' in name) --(Find space in name column)
+FROM users;
+```
+
+It can be used in combination to, for example separate name and last_name
+
+## Example
+
+```sql
+SELECT
+    SUBSTRING(name, 0, POSITION(' ' in name)) as first_name,
+    SUBSTRING(name, POSITION(' ' in name) + 1) as last_name
+FROM users;
+--or
+SELECT
+    SUBSTRING(name, 0, POSITION(' ' in name)) as first_name,
+    TRIM(SUBSTRING(name, POSITION(' ' in name))) as last_name
+FROM users;
+```
