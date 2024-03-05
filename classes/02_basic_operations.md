@@ -96,7 +96,7 @@ _percentage %_ is related to unknown characters, also, you can use \_underscore 
 ```sql
 SELECT * FROM users WHERE name LIKE '__st'; --(2 characters before st)
 SELECT * FROM users WHERE name LIKE '_a%'; --(1 character before a, and ends with any other characters)
-SELECT * FROM users WHERE name LIKE '%a%'; --(contains a);
+SELECT * FROM users WHERE name LIKE '%a%'; --(contains a)
 ```
 
 # DELETE values
@@ -105,5 +105,25 @@ DELETE command is similar with SELECT, be careful with the use of DELETE without
 
 ```sql
 DELETE FROM users WHERE name LIKE '__st'; --(2 characters before st rows will be deleted)
-DELETE FROM users; --(all rows will be deleted);
+DELETE FROM users; --(all rows will be deleted)
+```
+
+# DROP tables
+
+Use DROP TABLE _<table_name>_ command to destroy table, data will be lost.
+
+## Example
+
+```sql
+DROP TABLE users; --(all rows will be deleted and table destroyed)
+```
+
+# TRUNCATE tables
+
+Use TRUNCATE TABLE _<table_name>_ command to remove all rows without destroy the table.
+
+## Example
+
+```sql
+TRUNCATE TABLE users; --(all rows will be deleted and table will be empty)
 ```
