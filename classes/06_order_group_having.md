@@ -31,3 +31,20 @@ FROM USERS
 WHERE followers BETWEEN 4500 and 4999
 GROUP BY followers;
 ```
+
+# HAVING
+
+Is used as a filter when we use aggregate functions, is used after GROUP BY and before ORDER BY
+
+## Example
+
+```sql
+SELECT
+    COUNT(*), country
+FROM USERS
+GROUP BY country
+HAVING COUNT(*) > 5
+ORDER BY count(*) ASC;
+```
+
+HAVING allow use of BETWEEN and other comparison operators.
