@@ -23,6 +23,13 @@ Each one has pros and cons against other, but, all of them are similar with:
 - Predefined schemas
 - Focus: _Integrity_ and _Consistency_ of information
 
+### Terms
+
+- _DDL_: Data Definition Language: _CREATE, ALTER, DROP, TRUNCATE_
+- _DML_: Data Manipulation Language: _INSERT, DELETE, UPDATE_
+- _TCL_: Transaction Control Language: _COMMIT, ROLLBACK_
+- _DQL_: Data Query Language: _SELECT_
+
 ## NoSQL
 
 There some options also:
