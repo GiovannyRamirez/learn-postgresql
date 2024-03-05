@@ -62,3 +62,18 @@ ORDER BY
 ```
 
 Note that we replace _>=_ and _<=_ with BETWEEN comparation to show that BETWEEN includes xtremes.
+
+# DISTINCT
+
+Is used to get unique values from a table
+
+## Example
+
+```sql
+SELECT DISTINCT country FROM users;
+-- Similar to
+SELECT
+   country
+FROM USERS
+GROUP BY country;
+```
