@@ -44,3 +44,35 @@ If you want to add data in all columns, you can remove column parenthesis, but, 
 ```sql
 INSERT INTO users VALUES ('Other Name'), ('Last Name');
 ```
+
+# Update values
+
+To update a row in a column, you need an identificator, i.e: an id, primaryKey, etc.
+
+Use UPDATE _<table_name>_ SET command followed by columns and the new value separated by equal (=) WHERE id value, and end the command with semicolon _;_
+
+## Example
+
+```sql
+UPDATE users SET name = 'Name Changed' WHERE name = 'Other Name';
+```
+
+# Select values
+
+Use SELECT command followed by desired columns FROM _<table_name>_ and end the command with semicolon _;_
+
+## Example
+
+```sql
+SELECT name FROM users;
+```
+
+If you want to select all columns, you can replace desired columns with _\*_ and end the command with semicolon _;_
+
+Also, you can add filters, limits, aggregations.
+
+## Example
+
+```sql
+SELECT * FROM users LIMIT 2 OFFSET 2;
+```
