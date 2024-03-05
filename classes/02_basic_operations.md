@@ -1,4 +1,4 @@
-# Create tables
+# CREATE tables
 
 Use CREATE TABLE _<table_name>_ command followed by schema inside parenthesis _(field-name TYPE constraints (optional))_, _(comma if has more fields or table constraints)_, and end the command with semicolon _;_
 
@@ -23,7 +23,7 @@ with
 CREATE TABLE IF NOT EXISTS ...
 ```
 
-# Insert values
+# INSERT values
 
 Use INSERT INTO _<table_name>_ command followed by columns inside parenthesis _(field-name)_ VALUES followed by values inside parenthesis (in the same order of columns) and end the command with semicolon _;_
 
@@ -45,7 +45,7 @@ If you want to add data in all columns, you can remove column parenthesis, but, 
 INSERT INTO users VALUES ('Other Name'), ('Last Name');
 ```
 
-# Update values
+# UPDATE values
 
 To update a row in a column, you need an identificator, i.e: an id, primaryKey, etc.
 
@@ -57,7 +57,7 @@ Use UPDATE _<table_name>_ SET command followed by columns and the new value sepa
 UPDATE users SET name = 'Name Changed' WHERE name = 'Other Name';
 ```
 
-# Select values
+# SELECT values
 
 Use SELECT command followed by desired columns FROM _<table_name>_ and end the command with semicolon _;_
 
@@ -97,4 +97,13 @@ _percentage %_ is related to unknown characters, also, you can use \_underscore 
 SELECT * FROM users WHERE name LIKE '__st'; --(2 characters before st)
 SELECT * FROM users WHERE name LIKE '_a%'; --(1 character before a, and ends with any other characters)
 SELECT * FROM users WHERE name LIKE '%a%'; --(contains a);
+```
+
+# DELETE values
+
+DELETE command is similar with SELECT, be careful with the use of DELETE without WHERE clause, with that, you delete all content form the table, to DELETE specific value, use WHERE clause.
+
+```sql
+DELETE FROM users WHERE name LIKE '__st'; --(2 characters before st rows will be deleted)
+DELETE FROM users; --(all rows will be deleted);
 ```
