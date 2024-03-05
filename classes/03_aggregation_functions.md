@@ -25,7 +25,7 @@ Some of the math operations and functions are:
 DELETE FROM users WHERE id = (SELECT MAX(id) FROM users); --(delete last row from users table)
 ```
 
-Here, you can see a subquery into main query.
+Here, you can see a subquery into main query (Be careful with subqueries, it could be inefficient, you could do it with views or temporal tables, etc).
 
 - _COUNT()_: Returns total rows in table
 - _MIN()_: Returns min value in all input values not null
