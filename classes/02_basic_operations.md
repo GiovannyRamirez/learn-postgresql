@@ -23,6 +23,16 @@ with
 CREATE TABLE IF NOT EXISTS ...
 ```
 
+# ALTER table
+
+Used to modify table structure, like to add primary key
+
+## Example
+
+```sql
+ALTER TABLE users ADD PRIMARY KEY (id);
+```
+
 # INSERT values
 
 Use INSERT INTO _<table_name>_ command followed by columns inside parenthesis _(field-name)_ VALUES followed by values inside parenthesis (in the same order of columns) and end the command with semicolon _;_
