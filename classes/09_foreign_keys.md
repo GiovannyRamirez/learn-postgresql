@@ -13,3 +13,9 @@ ALTER TABLE city
     FOREIGN KEY (countrycode)
     REFERENCES country(code);
 ```
+
+## Considerations
+
+When you have a foreign key and you want to delete registers from table, you can configure _onDelete_ and _onUpdate_ actions
+
+- _CASCADE_: Update or Delete values related to that foreign key on every table that references it
