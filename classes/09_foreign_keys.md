@@ -19,3 +19,11 @@ ALTER TABLE city
 When you have a foreign key and you want to delete registers from table, you can configure _onDelete_ and _onUpdate_ actions
 
 - _CASCADE_: Update or Delete values related to that foreign key on every table that references it
+
+```sql
+ALTER TABLE city
+    ADD CONSTRAINT fk_country_code
+    FOREIGN KEY (countrycode)
+    REFERENCES country(code)
+    ON DELETE CASCADE;
+```
