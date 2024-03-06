@@ -33,3 +33,21 @@ ALTER TABLE _<table_name>_ ADD CHECK(_condition_);
 ```sql
 ALTER TABLE country ADD CHECK(surfacearea >= 0);
 ```
+
+You can add multiple conditions into CHECK constraint
+
+## Example
+
+```sql
+ALTER TABLE country ADD CHECK(continent IN ('Africa', 'Europe' ));
+```
+
+If you want to modify a constraint, first, you need to DROP it, and, after that create it again including modification
+
+ALTER TABLE _<table_name>_ DROP CONSTRAINT _<constraint_name>_;
+
+If you do not know the constraint name, you can go to DB GUI and generate DDL from table, in the sql file generated, you can see table schema with constraints
+
+```sql
+ALTER TABLE country DROP CONSTRAINT country_continent_check;
+```
