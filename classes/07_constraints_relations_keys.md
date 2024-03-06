@@ -21,3 +21,15 @@ Keys allows to generate relations between tables, allows to guarantee data integ
 - _Super Key_: Is a set of primary key and other candidate key
 - _Foreign Key_: Is a primary key of other table, used to create a relation between both tables, should share key constraints, considering, are the same key
 - _Composite Key_: When a primary key is a set of others keys inside same table
+
+# Check
+
+Used to verify fields in table, is an ALTER operation, so, you can do it as follows:
+
+ALTER TABLE _<table_name>_ ADD CHECK(_condition_);
+
+## Example
+
+```sql
+ALTER TABLE country ADD CHECK(surfacearea >= 0);
+```
