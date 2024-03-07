@@ -23,8 +23,17 @@ CREATE TABLE IF NOT EXISTS users_identity_always (
 );
 --
 CREATE TABLE IF NOT EXISTS users_identity_config (
-	id INTEGER GENERATED ALWAYS AS IDENTITY (START 100 INCREMENT BY 3) PRIMARY KEY, --You can not insert it manually and sets the star and increments
+	id INTEGER GENERATED ALWAYS AS IDENTITY (START 100 INCREMENT BY 3) PRIMARY KEY, --You can not insert it manually and sets the start and increments
 	name VARCHAR
 );
+```
 
+You can set a primary key combinating two fields, is not neccessary that both fields are unique, just the combination of them
+
+```sql
+CREATE TABLE IF NOT EXISTS combined_ids (
+	id int4,
+	name VARCHAR,
+    PRIMARY KEY (id, name)
+);
 ```
