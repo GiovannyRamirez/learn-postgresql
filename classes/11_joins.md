@@ -69,3 +69,16 @@ ORDER BY c.name DESC;
 ```
 
 In this way, you can get information about what records are not used yet
+
+## RIGHT OUTER JOIN (exclusive)
+
+It works as FULL OUTER JOIN but, you have to add the exclusive condition with WHERE clause
+
+```sql
+SELECT c.name AS country, ct.name AS continent
+    FROM country c
+    RIGHT OUTER JOIN continent ct
+    ON c.continent = ct.code
+    WHERE c.name is NULL
+ORDER BY c.name DESC;
+```
