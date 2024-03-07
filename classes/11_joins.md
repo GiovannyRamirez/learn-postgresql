@@ -36,7 +36,7 @@ Its important to set alias in columns and tables, and, to establish correct WHER
 
 From tables _A_ and _B_ you want the rows that matches a condition _ON_
 
-SELECT \* FROM _<table_a> A (alias)_ JOIN _<table_b> B (alias)_ ON _A.key_ = _B.key_;
+SELECT _<columns_names> using table aliases and also assign aliases to columns_ FROM _<table_a> A (alias)_ JOIN _<table_b> B (alias)_ ON _A.key_ = _B.key_;
 
 ```sql
 SELECT c.name AS country, ct.name AS continent
@@ -52,4 +52,20 @@ SELECT c.name AS country, ct.name AS continent
 ORDER BY c.name ASC;
 ```
 
-You can use JOIN or INNER JOIN clause, rsults will be the same
+You can use JOIN or INNER JOIN clause, results will be the same
+
+## FULL OUTER JOIN
+
+From tables _A_ and _B_ you get all the rows when there is a match on any table, you could get rows that do not have a value in the other table as NULL, i.e, when you have defined continents but, still do not have countries related to them
+
+SELECT _<columns_names> using table aliases and also assign aliases to columns_ FROM _<table_a> A (alias)_ FULL OUTER JOIN _<table_b> B (alias)_ ON _A.key_ = _B.key_;
+
+```sql
+SELECT c.name AS country, ct.name AS continent
+    FROM country c
+    FULL OUTER JOIN continent ct
+    ON c.continent = ct.code
+ORDER BY c.name DESC;
+```
+
+In this way, you can get information about what records are not used yet
