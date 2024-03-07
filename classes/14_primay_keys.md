@@ -37,3 +37,17 @@ CREATE TABLE IF NOT EXISTS combined_ids (
     PRIMARY KEY (id, name)
 );
 ```
+
+- _uuid_: Is an extension, you need to install it CREATE EXTENSION IF NOT EXISTS _<extension_name>_
+
+```sql
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+-- DROP EXTENSION "uuid-ossp"; to remove it
+
+SELECT uuid_generate_v4(); --Shows an uuid string
+
+CREATE TABLE IF NOT EXISTS users_uuid (
+	id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+	name VARCHAR
+);
+```
