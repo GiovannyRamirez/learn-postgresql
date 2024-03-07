@@ -4,7 +4,7 @@ Allows to join results from different conditions in same table or different tabl
 
 _<query_one>_ UNION _<query_two>_;
 
-Remeber that columns needs to be same type and needs to have same quantity
+Remember that columns needs to be same type and needs to have same quantity
 
 ## Example
 
@@ -15,7 +15,9 @@ SELECT * FROM continent WHERE code IN (3,5)
 ORDER BY name ASC;
 ```
 
-Youu can use it to match results from different tables using WHERE clause, but, this combination simulates JOIN, so, use JOIN instead, here, an example just to learn
+You can use it to match results from different tables using WHERE clause, but, this combination simulates JOIN, so, use JOIN instead, here, an example just to learn
+
+## Example
 
 ```sql
 SELECT c.name AS country, ct.name as continent
@@ -27,3 +29,27 @@ ORDER BY c.name ASC;
 Its important to set alias in columns and tables, and, to establish correct WHERE clause
 
 **_Be careful with UNION WHERE combination_**
+
+# JOIN
+
+## INNER JOIN
+
+From tables _A_ and _B_ you want the rows that matches a condition _ON_
+
+SELECT \* FROM _<table_a> A (alias)_ JOIN _<table_b> B (alias)_ ON _A.key_ = _B.key_;
+
+```sql
+SELECT c.name AS country, ct.name AS continent
+    FROM country c
+    JOIN continent ct
+    ON c.continent = ct.code
+ORDER BY c.name ASC;
+--
+SELECT c.name AS country, ct.name AS continent
+    FROM country c
+    INNER JOIN continent ct
+    ON c.continent = ct.code
+ORDER BY c.name ASC;
+```
+
+You can use JOIN or INNER JOIN clause, rsults will be the same
