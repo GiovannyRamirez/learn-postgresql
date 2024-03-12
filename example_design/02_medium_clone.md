@@ -8,6 +8,8 @@ To make a clone from [Medium](https://medium.com/), first we need to define some
 
   - _user_id_: Integer, with autoincrement and, it will be primary key
   - _username_: Varchar, always need a value, so its not null
+  - _email_: Varchar, Varchar, always need a value, so its not null
+  - _password_: Varchar, Varchar, always need a value, so its not null
   - _name_: Varchar, always need a value, so its not null
   - _role_: Varchar, also, it can not be null
   - _gender_: Varchar, also not null
