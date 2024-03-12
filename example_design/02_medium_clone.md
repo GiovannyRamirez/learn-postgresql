@@ -59,3 +59,21 @@ To make a clone from [Medium](https://medium.com/), first we need to define some
   Now, in Medium, the comments can replies, so, we can solve this adding a relation with a parent
 
   - _comment_parent_id_: Integer, here is an autorelation
+
+- _user_lists_: It works as a tags
+
+  - _user_list_id_: Integer, with autoincrement and, it will be primary key
+  - _title_: Varchar
+
+  Here, we can see a relation, because an user can have lists
+
+  - _user_id_: Foreign key from users
+
+- _user_list_entry_: It works to add a post into list
+
+  - _user_list_entry_id_: Integer, with autoincrement and, it will be primary key
+
+  Here, we can see two relations, first with user_lists, and, second, with posts, so
+
+  - _user_list_id_: Foreign key from user_lists
+  - _post_id_: Foreign key from posts
