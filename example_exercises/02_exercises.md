@@ -69,7 +69,7 @@ SELECT
     COUNT(*)
     FROM user_lists ul
     RIGHT JOIN users u ON u.user_id = ul.user_id
-    WHERE ul.user_id IS NULL;
+WHERE ul.user_id IS NULL;
 
 -- 9
 SELECT * FROM comments WHERE comment_id = 1
@@ -85,7 +85,7 @@ SELECT
         )
     )
     FROM comments
-    WHERE comment_parent_id = 1;
+WHERE comment_parent_id = 1;
 
 -- 11
 SELECT
@@ -99,9 +99,18 @@ SELECT
                 )
             )
             FROM comments cms
-            WHERE cms.comment_parent_id = cm.comment_id
+        WHERE cms.comment_parent_id = cm.comment_id
     ) AS replies
     FROM comments cm
-    WHERE cm.comment_parent_id IS NULL;
+WHERE cm.comment_parent_id IS NULL;
+```
 
+Exercise # 11 can be solved using functions, for that, we will use the function example [get_comment_replies](../classes/16_functions.md)
+
+```sql
+SELECT
+    cm.*,
+    get_comment_replies(cm.comment_id) AS replies
+    FROM comments cm
+WHERE cm.comment_parent_id IS NULL;
 ```
