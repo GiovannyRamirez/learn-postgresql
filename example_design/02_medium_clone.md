@@ -77,3 +77,7 @@ To make a clone from [Medium](https://medium.com/), first we need to define some
 
   - _user_list_id_: Foreign key from user_lists
   - _post_id_: Foreign key from posts
+
+With this description, Entity Relation Diagram can be seen here:
+
+![ERDMediumClone](/assets/img/ERDMediumExample.png)
