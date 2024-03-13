@@ -1,0 +1,31 @@
+# Best practices
+
+- Ask the objective of DB, how will be used
+- Minimize redundancy
+- Protect precission
+- Be accessible
+- Fulfill expectations
+- Connect with stakeholders
+- Try to keep it simple
+- Standarize
+- Consider future improvements
+- Normalize data
+- Create documentation and diagrams
+- Be careful with tech debt
+- Do not use abbreviatures, be careful with standards
+- Table names in singular
+- Use DB tools
+- Use constraints to protect data
+- Keep privacy as a priority
+- English names
+- Lower case, prevent special characters
+- Separate DB from backend server
+- Work with versions
+- Establish types and constraints correctly
+- Control primary keys
+- Define correctly keys and relations
+- Prevent use of reserved works
+- Names/Columns are contracts
+- DB is over all
+- Indexes must to be explicit
+- If exists a structure, use it to prevent schemas/names/etc changes
