@@ -22,7 +22,7 @@ To build a recursive CTE, use reserved word RECURSIVE and you have to follow nex
 WITH RECURSIVE _<cte_name> (<column_names>)_ AS (
 _<initial_values>_
 UNION ALL
-_<recursive_query> FROM <cte_name> with break condition_
+_<recursive_query> with break condition_
 ) _<normal_query> FROM <cte_name>_;
 
 ## Example (Recursive)
@@ -88,4 +88,66 @@ base|num|result|
    5|  8|    40|
    5|  9|    45|
    5| 10|    50|
+```
+
+# Real Example
+
+Consider a table where you have employees with id, name and a column called _reports_to_, that references another employee, like a hierarchical relationship
+
+```sql
+id|name             |reports_to|
+--+-----------------+----------+
+ 1|Chief Charles    |          |
+ 2|Subchief Susan   |         1|
+ 3|Subchief John    |         1|
+ 4|Manager Peter    |         3|
+ 5|Manager Melissa  |         3|
+ 6|Manager Carmen   |         2|
+ 7|Subchief Robert  |         5|
+ 8|Programmer Philip|         7|
+ 9|Programmer Edward|         7|
+10|President Karla  |          |
+
+-- Bring all people that reports to Chief Charles
+-- Not only Subchiefs Susan and John
+
+WITH RECURSIVE bosses AS (
+    SELECT id, name, reports_to FROM employees WHERE id = 1
+    UNION
+    SELECT e.id, e.name, e.reports_to FROM employees e
+    INNER JOIN bosses b ON b.id = e.reports_to
+) SELECT * FROM bosses;
+
+-- Returns
+id|name             |reports_to|
+--+-----------------+----------+
+ 1|Chief Charles    |          |
+ 2|Subchief Susan   |         1|
+ 3|Subchief John    |         1|
+ 4|Manager Peter    |         3|
+ 5|Manager Melissa  |         3|
+ 6|Manager Carmen   |         2|
+ 7|Subchief Robert  |         5|
+ 8|Programmer Philip|         7|
+ 9|Programmer Edward|         7|
+
+ -- President Karla is not here because she does not reports to Chief Charles
+
+ -- Now, bring just people that reports to Manager Melissa
+ -- Just replace id 5 instead of 1cin initial values
+
+WITH RECURSIVE bosses AS (
+    SELECT id, name, reports_to FROM employees WHERE id = 5
+    UNION
+    SELECT e.id, e.name, e.reports_to FROM employees e
+    INNER JOIN bosses b ON b.id = e.reports_to
+) SELECT * FROM bosses;
+
+-- Returns
+id|name             |reports_to|
+--+-----------------+----------+
+ 5|Manager Melissa  |         3|
+ 7|Subchief Robert  |         5|
+ 8|Programmer Philip|         7|
+ 9|Programmer Edward|         7|
 ```
