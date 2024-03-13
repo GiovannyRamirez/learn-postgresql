@@ -150,4 +150,58 @@ id|name             |reports_to|
  7|Subchief Robert  |         5|
  8|Programmer Philip|         7|
  9|Programmer Edward|         7|
+
+ -- Now, consider you want to go to determinated depth, it means, limit recursivity
+ -- For example, 3 levels of depth from Chief Charles
+ -- It means, Chief -> SubChief -> Manager
+
+WITH RECURSIVE bosses AS (
+    SELECT
+        id, name, reports_to, 1 AS depth
+    FROM employees WHERE id = 1
+    UNION
+    SELECT
+        e.id, e.name, e.reports_to, depth + 1
+    FROM employees e
+    INNER JOIN bosses b ON b.id = e.reports_to
+    WHERE depth < 3
+) SELECT * FROM bosses;
+
+-- Returns
+id|name           |reports_to|depth|
+--+---------------+----------+-----+
+ 1|Chief Charles  |          |    1|
+ 2|Subchief Susan |         1|    2|
+ 3|Subchief John  |         1|    2|
+ 4|Manager Peter  |         3|    3|
+ 5|Manager Melissa|         3|    3|
+ 6|Manager Carmen |         2|    3|
+
+ -- Now add the name of their chief
+ -- Just add a join at the outside query
+
+WITH RECURSIVE bosses AS (
+    SELECT
+        id, name, reports_to, 1 AS depth
+    FROM employees WHERE id = 1
+    UNION
+    SELECT
+        e.id, e.name, e.reports_to, depth + 1
+    FROM employees e
+    INNER JOIN bosses b ON b.id = e.reports_to
+    WHERE depth < 3
+) SELECT bs.*, em.name AS reports_to_name
+FROM bosses bs
+LEFT JOIN employees em ON em.id = bs.reports_to
+ORDER BY depth;
+
+-- Returns
+id|name           |reports_to|depth|reports_to_name|
+--+---------------+----------+-----+---------------+
+ 1|Chief Charles  |          |    1|               |
+ 3|Subchief John  |         1|    2|Chief Charles  |
+ 2|Subchief Susan |         1|    2|Chief Charles  |
+ 6|Manager Carmen |         2|    3|Subchief Susan |
+ 5|Manager Melissa|         3|    3|Subchief John  |
+ 4|Manager Peter  |         3|    3|Subchief John  |
 ```
