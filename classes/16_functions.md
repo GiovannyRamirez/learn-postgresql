@@ -2,17 +2,18 @@
 
 As in other programming languages, you can create functions to execute some task, you can pass parameters and return some value, PostgreSQL is not an exception and you can create a function considering
 
-CREATE OR REPLACE FUNCTION _<function_name>(<param_name> <param_type>)_
-RETURNS _<return_type>_
-AS
-_<double_dollar_sign>_
-DECLARE _<return_name> <return_type>_
-BEGIN
-_<function_declaration>_ INTO _<return_name>_
-RETURN _<return_name>_;
-END
-_<double_dollar_sign>_
-LANGUAGE plpgsql;
+CREATE OR REPLACE FUNCTION _<function_name>(<param_name> <param_type>)_  
+RETURNS _<return_type>_ AS _<double_dollar_sign>_  
+DECLARE _<return_name> <return_type>_;  
+BEGIN  
+ _<function_declaration>_ INTO _<return_name>_  
+RETURN _<return_name>_;  
+END;  
+_<double_dollar_sign>_ LANGUAGE plpgsql;
+
+Also, following [documentation](https://www.postgresql.org/docs/current/sql-createfunction.html), there are, other ways to create a function, nevertheless, we will work with mentioned here
+
+Here we will use _plpgsql language_, but, there are other languages too
 
 ## Example
 
@@ -20,9 +21,7 @@ For this example we can create the function to get json_agg and json_build_objec
 
 ```sql
 CREATE OR REPLACE FUNCTION get_comment_replies (id integer)
-RETURNS JSON
-AS
-$$
+RETURNS JSON AS $$
 DECLARE result JSON;
 BEGIN
     SELECT
@@ -37,6 +36,5 @@ BEGIN
 
     RETURN result;
 END;
-$$
-LANGUAGE plpgsql;
+$$ LANGUAGE plpgsql;
 ```
