@@ -19,10 +19,10 @@ WITH cte_example AS (
 
 To build a recursive CTE, use reserved word RECURSIVE and you have to follow next stucture
 
-WITH RECURSIVE _<cte_name> (<column_names>)_ AS (
-_<initial_values>_
-UNION ALL
-_<recursive_query> with break condition_
+WITH RECURSIVE _<cte_name> (<column_names>)_ AS (  
+_<initial_values>_  
+UNION  
+_<recursive_query> with break condition_  
 ) _<normal_query> FROM <cte_name>_;
 
 ## Example (Recursive)
