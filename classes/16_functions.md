@@ -86,3 +86,34 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 ```
+
+Now, if you use a lot of variables, you can use a _rowtype_, that is like an object, and you can access of attributes with _dot (.)_, is commonly used to save all columns from a table, lets go to transform last function to use it
+
+_<var_name> <table_name>%rowtype_;
+
+```sql
+CREATE OR REPLACE FUNCTION max_raise (emp_id integer)
+RETURNS NUMERIC(8,2) AS $$
+DECLARE
+    selected_employee employees%rowtype;
+    selected_job jobs%rowtype;
+
+    possible_raise NUMERIC(8,2);
+BEGIN
+    SELECT * FROM employees INTO selected_employee -- Save into rowtype var
+    WHERE employee_id = emp_id;
+
+    SELECT * FROM jobs INTO selected_job -- Save into rowtype var
+    WHERE job_id = selected_employee.job_id; -- Comparing with other rowtype var
+
+    possible_raise = selected_job.max_salary - selected_employee.salary;
+
+    IF (possible_raise < 0) THEN
+        possible_raise = 0; -- To assign a value to return
+        -- RAISE EXCEPTION 'Person with max_salary: %', emp_id; -- To throw an exception
+    END IF;
+
+    RETURN possible_raise;
+END;
+$$ LANGUAGE plpgsql;
+```
