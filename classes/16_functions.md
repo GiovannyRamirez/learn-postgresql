@@ -38,3 +38,42 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 ```
+
+You can use multiple variables in _DECLARE_ statement, and to save the data desired you do not do _INTO ..., INTO ..._, you use just one _INTO_ and order variables as columns
+
+Also, you can execute multiple queries into function
+
+## Example
+
+Consider you have _employees_ and _jobs_, in _employees_, you have job*id, salary, ..., and in \_jobs* you have job_id, min_salary, max_salary, ...
+
+You want to determine max_raise for an employee, so, you can do a function to calculate it and return the job_id
+
+```sql
+CREATE OR REPLACE FUNCTION max_raise (emp_id integer)
+RETURNS NUMERIC(8,2) AS $$
+DECLARE
+    employee_job_id int;
+    current_salary NUMERIC(8,2);
+    job_max_salary NUMERIC(8,2);
+    possible_raise NUMERIC(8,2);
+BEGIN
+    SELECT
+        job_id,
+        salary
+        INTO employee_job_id, current_salary -- INTO in same order as columns from SELECT
+    FROM employees
+    WHERE employee_id = emp_id;
+
+    SELECT
+        max_salary
+        INTO job_max_salary
+    FROM jobs
+    WHERE job_id = employee_job_id;
+
+    possible_raise = job_max_salary - current_salary;
+
+    RETURN possible_raise;
+END;
+$$ LANGUAGE plpgsql;
+```
