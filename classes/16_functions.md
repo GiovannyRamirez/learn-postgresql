@@ -45,7 +45,7 @@ Also, you can execute multiple queries into function
 
 ## Example
 
-Consider you have _employees_ and _jobs_, in _employees_, you have job*id, salary, ..., and in \_jobs* you have job_id, min_salary, max_salary, ...
+Consider you have _employees_ and _jobs_ entities, in _employees_, you have job_id, salary, ..., and in jobs you have job_id, min_salary, max_salary, ...
 
 You want to determine max_raise for an employee, so, you can do a function to calculate it and return the job_id
 
@@ -114,6 +114,28 @@ BEGIN
     END IF;
 
     RETURN possible_raise;
+END;
+$$ LANGUAGE plpgsql;
+```
+
+Also, you can to return a table, to do that, you need to specify columns names and types in RETURNS statement, and, to return, you returns the result of query
+
+...  
+RETURNS TABLE (_<column_name> <column_type>_) AS _<double_dollar_sign>_
+BEGIN  
+ RETURN query _<desired_query>_;  
+END;
+
+_<double_dollar_sign>_ LANGUAGE plpgsql;
+
+## Example
+
+```sql
+CREATE OR REPLACE FUNCTION get_employees ()
+RETURNS TABLE (id int, name varchar) AS $$
+BEGIN
+    RETURN QUERY
+        SELECT employee_id, employee_name FROM employees;
 END;
 $$ LANGUAGE plpgsql;
 ```
