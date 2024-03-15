@@ -49,6 +49,10 @@ Consider you have _employees_ and _jobs_, in _employees_, you have job*id, salar
 
 You want to determine max_raise for an employee, so, you can do a function to calculate it and return the job_id
 
+You have to consider if the current_salary is less than 0, when for example, employee has upper salary than max
+
+To solve this, you can use _IF THEN_ clause
+
 ```sql
 CREATE OR REPLACE FUNCTION max_raise (emp_id integer)
 RETURNS NUMERIC(8,2) AS $$
@@ -72,6 +76,11 @@ BEGIN
     WHERE job_id = employee_job_id;
 
     possible_raise = job_max_salary - current_salary;
+
+    IF (possible_raise < 0) THEN
+        possible_raise = 0; -- To assign a value to return
+        -- RAISE EXCEPTION 'Person with max_salary: %', emp_id; -- To throw an exception
+    END IF;
 
     RETURN possible_raise;
 END;
